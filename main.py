@@ -19,4 +19,8 @@ def main():
     authentication.set_access_token(accessToken, accessSecret);
     
     api = tp.API(authentication);
-    getUserTweets("KrazyBonesTV", api);
+    recentTweets = getUserTweets("KrazyBonesTV", api);
+    for tweet in range(recentTweets):
+      print(tweet);
+
+main();

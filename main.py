@@ -1,5 +1,9 @@
 import tweepy as tp;
 
+def getUserTweets(user, api):
+  tweets = api.user_timeline(user);
+  return [tweets[0].text, tweets[1].text, tweets[2].text]
+
 def main():
     
     """ Main entry point -- run script. """ 
@@ -15,4 +19,4 @@ def main():
     authentication.set_access_token(accessToken, accessSecret);
     
     api = tp.API(authentication);
-    
+    getUserTweets("KrazyBonesTV", api);

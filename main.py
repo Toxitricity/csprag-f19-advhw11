@@ -1,26 +1,28 @@
 import tweepy as tp;
 
-def getUserTweets(user, api):
-  tweets = api.user_timeline(user);
-  return [tweets[0].text, tweets[1].text, tweets[2].text]
+def getUserTweets(user, api, num_desired=20):
+  """ Grab text of most recent user tweets """
+  tweets = api.user_timeline(user, count=num_desired);
+  return [tweet.text for tweet in tweets][0:num_desired]
 
 def main():
     
     """ Main entry point -- run script. """ 
 
-
-    accessToken : str = "";
-    accessSecret : str = "";
-
-    consumerKey : str = ""; # Enter these in manually, found in the twitter
-    consumerSecret : str = ""; # developer section.
+    accessToken : str = ""
+    accessSecret : str = ""
+    consumerKey : str = ""
+    consumerSecret : str = ""
     
     authentication = tp.OAuthHandler(consumerKey, consumerSecret);
     authentication.set_access_token(accessToken, accessSecret);
     
     api = tp.API(authentication);
     recentTweets = getUserTweets("KrazyBonesTV", api);
-    for tweet in range(recentTweets):
-      print(tweet);
+    for tweet in recentTweets:
+      if "Commission" in tweet or "Commissions" in tweet:
+        print("Commissions Opened!");
+    
+    print("Application Closed");
 
 main();
